@@ -8,6 +8,10 @@ import java.util.List;
 
 public interface ProductService {
     Product createProduct(ProductDto productDto);
+
     List<ProductDto> getAll();
+
     ProductPriceRangeDto getPriceRange();
+
+    List<ProductDto> filter(String name, Long CategoryId, Long companyId);
 }

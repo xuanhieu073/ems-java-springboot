@@ -32,15 +32,14 @@ public class SpringSecurityConfig {
     public static PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeHttpRequests((authorize) -> {
-//                    authorize.requestMatchers(HttpMethod.POST, "api/**").hasRole("ADMIN");
-//                    authorize.requestMatchers(HttpMethod.GET, "api/**").hasAnyRole("ADMIN", "USER");
                     authorize.requestMatchers(HttpMethod.GET, "api/**").permitAll();
                     authorize.requestMatchers("api/auth/**").permitAll();
-                    authorize.anyRequest().authenticated();
+                    authorize.anyRequest().permitAll();
                 }).httpBasic(Customizer.withDefaults());
 
         http.exceptionHandling(exception -> exception.authenticationEntryPoint(jwtAuthenticationEntryPoint));
@@ -55,20 +54,20 @@ public class SpringSecurityConfig {
         return configuration.getAuthenticationManager();
     }
 
-//    @Bean
-//    public UserDetailsService userDetailsService() {
-//        UserDetails user = User.builder()
-//                .username("user")
-//                .password(passwordEncoder().encode("password"))
-//                .roles("USER")
-//                .build();
-//
-//        UserDetails admin = User.builder()
-//                .username("admin")
-//                .password(passwordEncoder().encode("admin"))
-//                .roles("ADMIN")
-//                .build();
-//
-//        return new InMemoryUserDetailsManager(user, admin);
-//    }
+    // @Bean
+    // public UserDetailsService userDetailsService() {
+    // UserDetails user = User.builder()
+    // .username("user")
+    // .password(passwordEncoder().encode("password"))
+    // .roles("USER")
+    // .build();
+    //
+    // UserDetails admin = User.builder()
+    // .username("admin")
+    // .password(passwordEncoder().encode("admin"))
+    // .roles("ADMIN")
+    // .build();
+    //
+    // return new InMemoryUserDetailsManager(user, admin);
+    // }
 }

@@ -18,7 +18,7 @@ public class ProductDto {
     private Double rating;
     private String description;
     private Boolean freeShip;
-    private Long CategoryId;
+    private Long categoryId;
     private Long companyId;
     private List<Long> colorsId;
 }

@@ -18,20 +18,31 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductController {
     private ProductService productService;
+
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
     public ResponseEntity<Product> createProduct(@RequestBody ProductDto productDto) {
         Product newProduct = productService.createProduct(productDto);
         return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
     }
+
     @GetMapping
     public ResponseEntity<List<ProductDto>> getAll() {
         List<ProductDto> products = productService.getAll();
         return ResponseEntity.ok(products);
     }
+
     @GetMapping("/price-range")
     public ResponseEntity<ProductPriceRangeDto> getPriceRange() {
         ProductPriceRangeDto priceRange = productService.getPriceRange();
         return ResponseEntity.ok(priceRange);
+    }
+
+    @GetMapping("/filter")
+    public ResponseEntity<List<ProductDto>> filter(@RequestParam String query,
+            @RequestParam(required = false) Long categoryId,
+            @RequestParam(required = false) Long companyId) {
+        List<ProductDto> products = productService.filter(query, categoryId, companyId);
+        return ResponseEntity.ok(products);
     }
 }
