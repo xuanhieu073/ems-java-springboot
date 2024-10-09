@@ -47,6 +47,7 @@ public class ProductServiceImpl implements ProductService {
                                                                 "Color is exists!")))
                                 .collect(Collectors.toSet());
                 newProduct.setColors(productColors);
+                productRepository.save(newProduct);
                 return newProduct;
         }
 
@@ -63,9 +64,10 @@ public class ProductServiceImpl implements ProductService {
         }
 
         @Override
-        public List<ProductDto> filter(String name, Long categoryId, Long companyId) {
-                List<Product> products = productRepository.filter(name, categoryId, companyId);
+        public List<ProductDto> filter(String name, Long categoryId, Long companyId, Long colorId, Long fromPrice, Long toPrice, Boolean isFreeShip) {
+                List<Product> products = productRepository.filter(name, categoryId, companyId, colorId, fromPrice, toPrice, isFreeShip);
                 return products.stream().map(product -> modelMapper.map(product, ProductDto.class))
                                 .collect(Collectors.toList());
         }
+
 }

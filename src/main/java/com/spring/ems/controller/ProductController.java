@@ -39,10 +39,16 @@ public class ProductController {
     }
 
     @GetMapping("/filter")
-    public ResponseEntity<List<ProductDto>> filter(@RequestParam String query,
+    public ResponseEntity<List<ProductDto>> filter(
+            @RequestParam(required = false) String query,
             @RequestParam(required = false) Long categoryId,
-            @RequestParam(required = false) Long companyId) {
-        List<ProductDto> products = productService.filter(query, categoryId, companyId);
+            @RequestParam(required = false) Long companyId,
+            @RequestParam(required = false) Long colorId,
+            @RequestParam(required = false) Long fromPrice,
+            @RequestParam(required = false) Long toPrice,
+            @RequestParam(required = false) Boolean isFreeShip
+    ) {
+        List<ProductDto> products = productService.filter(query, categoryId, companyId, colorId, fromPrice, toPrice, isFreeShip);
         return ResponseEntity.ok(products);
     }
 }

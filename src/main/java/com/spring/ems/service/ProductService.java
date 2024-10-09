@@ -13,5 +13,5 @@ public interface ProductService {
 
     ProductPriceRangeDto getPriceRange();
 
-    List<ProductDto> filter(String name, Long CategoryId, Long companyId);
+    List<ProductDto> filter(String name, Long CategoryId, Long companyId, Long colorId, Long fromPrice, Long toPrice, Boolean isFreeShip);
 }
