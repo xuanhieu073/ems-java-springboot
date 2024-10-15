@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Set;
+import java.util.List;
 
 @Entity
 @Getter
@@ -31,8 +32,7 @@ public class Product {
     @JoinColumn(name = "company_id")
     private Company company;
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "products_colors",
-            joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "color_id", referencedColumnName = "id"))
+    @JoinTable(name = "products_colors", joinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "color_id", referencedColumnName = "id"))
     private Set<Color> colors;
+    private List<Long> colorsId;
 }

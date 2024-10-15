@@ -46,9 +46,23 @@ public class ProductController {
             @RequestParam(required = false) Long colorId,
             @RequestParam(required = false) Long fromPrice,
             @RequestParam(required = false) Long toPrice,
-            @RequestParam(required = false) Boolean isFreeShip
-    ) {
-        List<ProductDto> products = productService.filter(query, categoryId, companyId, colorId, fromPrice, toPrice, isFreeShip);
+            @RequestParam(required = false) Boolean isFreeShip) {
+        List<ProductDto> products = productService.filter(query, categoryId, companyId, colorId, fromPrice, toPrice,
+                isFreeShip);
         return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<ProductDto> getProduct(@PathVariable("id") Long productId) {
+        ProductDto product = productService.getProductById(productId);
+        return ResponseEntity.ok(product);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("{id}")
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable("id") Long productId,
+            @RequestBody ProductDto productDto) {
+        ProductDto updatedProduct = productService.updateProduct(productId, productDto);
+        return ResponseEntity.ok(updatedProduct);
     }
 }
