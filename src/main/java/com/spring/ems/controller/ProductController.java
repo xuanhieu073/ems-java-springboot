@@ -65,4 +65,10 @@ public class ProductController {
         ProductDto updatedProduct = productService.updateProduct(productId, productDto);
         return ResponseEntity.ok(updatedProduct);
     }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deleteProduct(@PathVariable("id") Long productId) {
+        productService.deleteProduct(productId);
+        return ResponseEntity.ok("Delete employee successfully");
+    }
 }
