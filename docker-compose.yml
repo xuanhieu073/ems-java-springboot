@@ -1,0 +1,6 @@
+version: '3.8'
+services:
+  java-maven-app:
+    image: xuanhieu073/ems:1.0
+    ports:
+      - 8080:8080
