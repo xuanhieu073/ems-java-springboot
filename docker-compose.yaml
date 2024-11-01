@@ -3,4 +3,4 @@ services:
   java-maven-app:
     image: xuanhieu073/ems:1.0
     ports:
-      - 8080:8080
+      - 80:8080
