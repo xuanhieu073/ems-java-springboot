@@ -11,13 +11,6 @@ pipeline {
                 }
             }
         }
-        stage('Start MySQL') {
-            steps {
-                script {
-                    gv.startMySQL()
-                }
-            }
-        }
         stage("build jar") {
             steps {
                 script {
@@ -37,13 +30,6 @@ pipeline {
                 script {
                     gv.deployApp()
                 }
-            }
-        }
-    }
-    post {
-        always {
-            script {
-                gv.stopMySQL()
             }
         }
     }

@@ -1,28 +1,3 @@
-def startMySQL() {
-    sh """
-    docker run --rm -d \
-        --name mysql-build \
-        -e MYSQL_ROOT_PASSWORD=123 \
-        -e MYSQL_DATABASE=ems \
-        -p 5200:3306 \
-        mysql:8.0
-    """
-
-    // Wait for MySQL to be ready
-    sh """
-        apt-get update && apt-get install -y netcat
-        echo "Waiting for MySQL to be ready..."
-        until nc -z localhost 5200; do
-            sleep 1
-        done
-        echo "MySQL is ready!"
-    """
-}
-
-def stopMySQL() {
-    sh "docker stop mysql-build || true"
-}
-
 def buildJar() {
     echo "bulding the application"
     sh "mvn package"
