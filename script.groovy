@@ -11,7 +11,7 @@ def startMySQL() {
     // Wait for MySQL to be ready
     sh """
     echo "Waiting for MySQL to be ready..."
-    until nc -z localhost ${env.MYSQL_PORT}; do
+    until nc -z localhost 5200; do
         sleep 1
     done
     echo "MySQL is ready!"
