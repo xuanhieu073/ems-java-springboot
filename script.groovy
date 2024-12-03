@@ -1,3 +1,23 @@
+def startMySQL() {
+    sh """
+    docker run --rm -d \
+        --name mysql-build \
+        -e MYSQL_ROOT_PASSWORD=123 \
+        -e MYSQL_DATABASE=ems \
+        -p 5200:3306 \
+        mysql:8.0
+    """
+
+    // Wait for MySQL to be ready
+    sh """
+    echo "Waiting for MySQL to be ready..."
+    until nc -z localhost ${env.MYSQL_PORT}; do
+        sleep 1
+    done
+    echo "MySQL is ready!"
+    """
+}
+
 def buildJar() {
     echo "bulding the application"
     sh "mvn package"
