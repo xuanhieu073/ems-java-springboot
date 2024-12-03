@@ -18,6 +18,10 @@ def startMySQL() {
     """
 }
 
+def stopMySQL() {
+    sh "docker stop mysql-build || true"
+}
+
 def buildJar() {
     echo "bulding the application"
     sh "mvn package"

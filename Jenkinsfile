@@ -40,4 +40,11 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            script {
+                gv.stopMySQL()
+            }
+        }
+    }
 }
