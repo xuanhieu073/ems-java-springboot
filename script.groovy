@@ -10,11 +10,12 @@ def startMySQL() {
 
     // Wait for MySQL to be ready
     sh """
-    echo "Waiting for MySQL to be ready..."
-    until nc -z localhost 5200; do
-        sleep 1
-    done
-    echo "MySQL is ready!"
+        apt-get update && apt-get install -y netcat
+        echo "Waiting for MySQL to be ready..."
+        until nc -z localhost ${MYSQL_PORT}; do
+            sleep 1
+        done
+        echo "MySQL is ready!"
     """
 }
 
